@@ -9,6 +9,7 @@
 #include "Key.h"
 #include "Door.h"
 #include "Money.h"
+#include "Potion.h"
 #include "Goal.h"
 #include "AudioManager.h"
 #include "Utility.h"
@@ -173,6 +174,19 @@ void GameplayState::HandleCollision(int newPlayerX, int newPlayerY)
 			AudioManager::GetInstance()->PlayMoneySound();
 			collidedMoney->Remove();
 			m_player.AddMoney(collidedMoney->GetWorth());
+			m_player.SetPosition(newPlayerX, newPlayerY);
+			break;
+		}
+		case ActorType::Potion:
+		{
+			Potion* collidedPotion = dynamic_cast<Potion*>(collidedActor);
+			assert(collidedPotion);
+			AudioManager::GetInstance()->PlayGainLivesSound();
+			collidedPotion->Remove();
+			if (m_player.GetLives() < kStartingNumberOfLives)
+			{
+				m_player.IncrementLives();
+			}
 			m_player.SetPosition(newPlayerX, newPlayerY);
 			break;
 		}

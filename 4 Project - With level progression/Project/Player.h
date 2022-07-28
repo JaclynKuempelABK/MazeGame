@@ -3,6 +3,8 @@
 
 class Key;
 
+constexpr int kStartingNumberOfLives = 3;
+
 class Player : public PlacableActor
 {
 public:
@@ -20,6 +22,7 @@ public:
 
 	int GetLives() { return m_lives; }
 	void DecrementLives() { m_lives--; }
+	void IncrementLives() { m_lives++; }
 
 	virtual ActorType GetType() override { return ActorType::Player; }
 	virtual void Draw() override;

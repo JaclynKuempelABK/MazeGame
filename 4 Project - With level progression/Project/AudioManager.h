@@ -77,6 +77,13 @@ public:
 		Beep(1568, 50);
 	}
 
+	void PlayGainLivesSound()
+	{
+		if (!m_SoundOn)
+			return;
+		Beep(1800, 100);
+	}
+
 	void PlayLoseLivesSound()
 	{
 		if (!m_SoundOn)
